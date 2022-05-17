@@ -26,16 +26,16 @@ const Notification = ({ message }) => {
     return null
   }
 
-  if(message.includes('added')) {
+  if(message.includes('removed') || message.includes('failed')) {
     return (
-      <div className='message' style={goodMessage}>
+      <div className='message' style={badMessage}>
         {message}
       </div>
     )
   }
 
   return (
-    <div className='message' style={badMessage}>
+    <div className='message' style={goodMessage}>
       {message}
     </div>
   )
@@ -60,10 +60,12 @@ const Filter = ({ filter,setFilter, setShowFilter }) => {
 const PersonForm = ({newName, newNumber, persons, setPersons, setNewName, setNewNum, setMessage}) => {
   const addPerson = (event) => {
     event.preventDefault()
+    
     const personObject = {
       name: newName,
       number: newNumber
     }
+
     const inPhonebook = persons.find(person => person.name === newName)
     if( inPhonebook && inPhonebook.number !== newNumber && window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
       personService
@@ -98,6 +100,16 @@ const PersonForm = ({newName, newNumber, persons, setPersons, setNewName, setNew
           setMessage(
             `${newName} was successfully added`
           )
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000);
+        })
+        .catch(error => {
+          setMessage(
+            error.response.data.error
+          )
+          setNewName('')
+          setNewNum('')
           setTimeout(() => {
             setMessage(null)
           }, 5000);

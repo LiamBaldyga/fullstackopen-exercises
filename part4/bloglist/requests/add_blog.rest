@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5vdnZ5IiwiaWQiOiI2MjgyYTZlNjM3ZDljOWNiNjQ2OTc1MDkiLCJpYXQiOjE2NTI3NDA4MjksImV4cCI6MTY1Mjc0NDQyOX0.f-lVd174vqkdbykEfGA-d4auHIJ9xYaJD2yQr7g-v8A
+
+{
+  "title": "lolaslsasdadasd",
+  "author": "benstie",
+  "likes": 5,
+  "url": "www.google.com",
+  "userId": "6282a6e637d9c9cb64697509"
+}
