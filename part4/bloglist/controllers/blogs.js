@@ -29,7 +29,7 @@ blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
 
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
   const user = request.user
 
   const blogToDelete = await Blog.findById(request.params.id)
