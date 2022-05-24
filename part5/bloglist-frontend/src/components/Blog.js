@@ -27,7 +27,7 @@ const Blog = ({ blog, update, user, delBlog }) => {
   const deleteBlog = () => delBlog(blog)
 
   const isBlogOwner = () => {
-    const matching = user.username === blog
+    const matching = user.username === blog.user.username
     if(matching){
       return <button onClick={deleteBlog}>delete</button>
     } else {
