@@ -3,18 +3,18 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (request, response) => {
-  const { username, name, password} = request.body
+  const { username, name, password } = request.body
 
-  if(!password || password.length < 3) {
+  if (!password || password.length < 3) {
     return response.status(400).json({
-      error: 'password required with minimum length of 3'
+      error: 'password required with minimum length of 3',
     })
   }
 
   const existingUser = await User.findOne({ username })
   if (existingUser) {
     return response.status(400).json({
-      error: 'username must be unique'
+      error: 'username must be unique',
     })
   }
 
@@ -24,7 +24,7 @@ usersRouter.post('/', async (request, response) => {
   const user = new User({
     username,
     name,
-    passwordHash
+    passwordHash,
   })
 
   const savedUser = await user.save()
@@ -33,9 +33,12 @@ usersRouter.post('/', async (request, response) => {
 })
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User
-    .find({}).populate('blogs', { url: 1, title: 1, author: 1 })
-  
+  const users = await User.find({}).populate('blogs', {
+    url: 1,
+    title: 1,
+    author: 1,
+  })
+
   response.json(users)
 })
 
